@@ -15,16 +15,16 @@
             if (mysqli_num_rows($result) === 1) {
                 $row = mysqli_fetch_assoc($result);
                 if($row['username'] === $username && $row['password'] === $password){
-                    echo 'Logged in succesfully!<br>';
+                    echo '<div class="success">Logged in succesfully!</div>';
                     $_SESSION['id'] = $row['id'];
                     header('location: ?x=main');
                 }
                 else {
-                    echo 'Wrong username or password!<br>';
+                    echo '<div class="error">Wrong username or password!</div>';
                 }
             }
             else {
-                echo 'Wrong username or password!<br>';
+                echo '<div class="error">Wrong username or password!</div>';
             }
         }
     }

@@ -1,7 +1,14 @@
 <?php
     session_start();
-    include 'config/db_connect.php';
-    include 'functions.php';
+    include 'db_connect.php';
+    
+    function validate($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
     if(isset($_SESSION['id'])) {
         $user_id = $_SESSION['id'];
         $request = "SELECT * FROM users WHERE id='$user_id'";
@@ -13,19 +20,26 @@
 <!doctype html>
 <html>
     <head>
-        <meta charset="utf8">
+        <meta charset='utf8'>
         <title><?=$site_title?></title>
+        <link rel='stylesheet' href='style.css'>
     </head>
     <body>
+        <center><h1>Simple-forum</h1>
+        <i>by Dominik Gryszkiewicz</i></center>
+        <hr>
         <div id='menu'>
-            <b>Menu</b><br>
-            <a href='?x=main'>Home page</a>
+            <center><a href='?x=main'>Home page</a>
             <?php
                 if(!isset($_SESSION['id'])) {
                     echo ' | <a href="?x=login">Login page</a> | <a href="?x=register">Registration</a>';
                 }
+                else {
+                    echo ' | <a href="?x=accountsettings">Account settings</a>';
+                }
             ?>
            <hr>
+           </center>
 
             <?php
                 if (isset($_SESSION['id'])) {
@@ -34,6 +48,14 @@
                 }
             ?>    
         </div>
+
+        <?php
+            if(isset($_GET['msg'])){
+                if($_GET['msg'] == "threadadded") {
+                    echo '<div class="success">Thread added!</div>';
+                }
+            }
+        ?>
 
         <?php
         if(isset($_GET['x'])){
@@ -55,6 +77,12 @@
                     break;
                 case 'thread':
                     include('thread.php');
+                    break;
+                case 'addthread':
+                    include('addthread.php');
+                    break;
+                case 'accountsettings':
+                    include('accountsettings.php');
                     break;
             }
         }

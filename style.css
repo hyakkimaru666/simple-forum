@@ -1,0 +1,35 @@
+body {
+    background-color: #222;
+    color:bisque
+}
+a, a:active, a:visited {
+    color:aquamarine;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color:aqua;
+}
+.comment, .thread {
+    position: relative;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    min-width: 400px;
+    max-width: 800px;
+}
+
+.error {
+    color:red;
+}
+
+.success {
+    color:green;
+}
+
+textarea, input, button {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #333;
+    color: bisque;
+}
